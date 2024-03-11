@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\book;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,19 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    // 變數宣告
+    // $a=0;
+    // $b = 123;
+    $c='你好';
+    $d=(object)['id'=>1];
+    $e=['id'=> 1];
+
+    $books = Book::get();
+    
+
+    // 終止並印出
+    dd($books);
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
