@@ -23,7 +23,7 @@ export default{
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">儀表板</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">編輯教師</h2>
         </template>
 
         <div class="py-12">
@@ -31,7 +31,7 @@ export default{
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                     
                     <div>
-                        <Link :href="route('lessonAdd')" :active="route().current('lessonAdd')">
+                        <Link :href="route('teacherAdd')" :active="route().current('teacherAdd')">
                             <PublicBtn bg-color="bg-green-500" content="新增"></PublicBtn>
                         </Link>
 
@@ -42,20 +42,16 @@ export default{
                         <thead>
                             <tr>
                                 <th class="border border-slate-400">序號</th>
-                                <th class="border border-slate-400">課程名稱</th>
-                                <th class="border border-slate-400">課程照片</th>
+                                <th class="border border-slate-400 w-2/3">教師姓名</th>
                                 <th class="border border-slate-400">操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="border border-slate-400">1</td>
-                                <td class="border border-slate-400">國語</td>
+                                <td class="border border-slate-400">Stanley</td>
                                 <td class="border border-slate-400">
-                                    <img :src="mandarin" alt="">
-                                </td>
-                                <td class="border border-slate-400">
-                                    <Link :href="route('lessonEdit')" :active="route().current('lessonEdit')">
+                                    <Link :href="route('teacherEdit')" :active="route().current('teacherEdit')">
                                         <PublicBtn bg-color="bg-blue-500" content="編輯"></PublicBtn>
                                     </Link>
                                     <button class="bg-red-500 text-white p-2 m-2 rounded-md">刪除</button>
@@ -63,14 +59,12 @@ export default{
                             </tr>
                             <tr>
                                 <td class="border border-slate-400">2</td>
-                                <td class="border border-slate-400">英語</td>
                                 <td class="border border-slate-400">Tony</td>
                                 <td class="border border-slate-400">
-                                    
-                                    <Link :href="route('lessonEdit')" :active="route().current('lessonEdit')">
+                                    <Link :href="route('teacherEdit')" :active="route().current('teacherEdit')">
                                         <PublicBtn bg-color="bg-blue-500" content="編輯"></PublicBtn>
                                     </Link>
-                                    <PublicBtn bg-color="bg-red-500" content="刪除"></PublicBtn>
+                                    <button class="bg-red-500 text-white p-2 m-2 rounded-md">刪除</button>
                                 </td>
                             </tr>
                         </tbody>

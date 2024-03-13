@@ -34,7 +34,25 @@ Route::get('/lesson-add', function () {
     return Inertia::render('LessonAdd');
 })->middleware(['auth', 'verified'])->name('lessonAdd');
 
+// 編輯課程
+Route::get('/lesson-edit', function () {
+    return Inertia::render('EditLesson');
+})->middleware(['auth', 'verified'])->name('lessonEdit');
 
+// 老師管理
+Route::get('/teacher-management', function () {
+    return Inertia::render('TeacherManagement');
+})->middleware(['auth', 'verified'])->name('TeacherManagement');
+
+// 新增教師
+Route::get('/teacher-add', function () {
+    return Inertia::render('TeacherAdd');
+})->middleware(['auth', 'verified'])->name('teacherAdd');
+
+// 編輯教師
+Route::get('/teacher-edit', function () {
+    return Inertia::render('EditTeacher');
+})->middleware(['auth', 'verified'])->name('teacherEdit');
 
 
 

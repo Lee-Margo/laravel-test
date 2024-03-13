@@ -3,12 +3,14 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 import mandarin from '/images/mandarin.jpg';
 import PublicBtn from '@/Components/PublicBtn.vue';
+// import NavLink from '@/Components/NavLink.vue';
 export default{
     components:{
         Head,
         AuthenticatedLayout,
         Link,
         PublicBtn,
+        // NavLink,
     },
     data(){
         return{
@@ -23,7 +25,7 @@ export default{
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">新增課程</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">編輯課程</h2>
         </template>
 
         <div class="py-12">
@@ -41,7 +43,8 @@ export default{
                             </li>
                             <li class="flex flex-col">
                                 <label for="img">課程照片</label>
-                                <a href="" class="mb-2 relative bg-gray-200 h-[150px] w-1/3 text-center leading-[150px] text-gray-500">點擊上傳圖片
+                                <a class="mb-2 relative bg-gray-200 h-[150px] w-1/3 text-center leading-[150px] text-gray-500">點擊上傳圖片
+                                    <img :src="mandarin" alt="" class="absolute top-0">
                                     <input id="img" type="file" accept="image/*" class="absolute left-0 h-[150px] w-full cursor-pointer">
                                 </a>
                             </li>
