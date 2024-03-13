@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use App\Models\book;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,31 +17,28 @@ use App\Models\book;
 |
 */
 
-Route::get('/', function () {
-    // 變數宣告
-    // $a=0;
-    // $b = 123;
-    $c='你好';
-    $d=(object)['id'=>1];
-    $e=['id'=> 1];
+Route::get('/',function(){
+    return Inertia::render('Welcome');});
 
-    $books = Book::get();
-    
-
-    // 終止並印出
-    dd($books);
-
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// 要加controller 
+Route::get('/lesson-management', function () {
+    return Inertia::render('LessonManagement');
+})->middleware(['auth', 'verified'])->name('dashboard_2');
+
+Route::get('/lesson-add', function () {
+    return Inertia::render('LessonAdd');
+})->middleware(['auth', 'verified'])->name('lessonAdd');
+
+
+
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
