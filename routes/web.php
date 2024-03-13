@@ -54,6 +54,15 @@ Route::get('/teacher-edit', function () {
     return Inertia::render('EditTeacher');
 })->middleware(['auth', 'verified'])->name('teacherEdit');
 
+// 學期課表總覽
+Route::get('/semester-management', function () {
+    return Inertia::render('SemesterManagement');
+})->middleware(['auth', 'verified'])->name('semesterManagement');
+
+// 學期課表變動
+Route::get('/semester-add', function () {
+    return Inertia::render('SemesterAdd');
+})->middleware(['auth', 'verified'])->name('semesterAdd');
 
 
 
