@@ -59,11 +59,15 @@ Route::get('/semester-management', function () {
     return Inertia::render('SemesterManagement');
 })->middleware(['auth', 'verified'])->name('semesterManagement');
 
-// 學期課表變動
+// 學期課表新增
 Route::get('/semester-add', function () {
     return Inertia::render('SemesterAdd');
 })->middleware(['auth', 'verified'])->name('semesterAdd');
 
+// 學期課表更改
+Route::get('/semester-edit', function () {
+    return Inertia::render('EditSemester');
+})->middleware(['auth', 'verified'])->name('semesterEdit');
 
 
 

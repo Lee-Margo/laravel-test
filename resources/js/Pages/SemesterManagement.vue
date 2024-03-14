@@ -53,13 +53,13 @@ export default{
                                 <td class="border border-slate-400">113</td>
                                 <td class="border border-slate-400">上</td>
                                 <td class="border border-slate-400">
-                                    <Link :href="route('lessonEdit')" :active="route().current('lessonEdit')">
+                                    <Link :href="route('semesterEdit')" :active="route().current('semesterEdit')">
                                         <PublicBtn bg-color="bg-green-500" content="寄送"></PublicBtn>
                                     </Link>
-                                    <Link :href="route('lessonEdit')" :active="route().current('lessonEdit')">
+                                    <Link :href="route('semesterEdit')" :active="route().current('semesterEdit')">
                                         <PublicBtn bg-color="bg-blue-500" content="編輯"></PublicBtn>
                                     </Link>
-                                    <Link :href="route('lessonEdit')" :active="route().current('lessonEdit')">
+                                    <Link :href="route('semesterEdit')" :active="route().current('semesterEdit')">
                                         <PublicBtn bg-color="bg-red-500" content="刪除"></PublicBtn>
                                     </Link>
                                 </td>
@@ -69,13 +69,13 @@ export default{
                                 <td class="border border-slate-400">113</td>
                                 <td class="border border-slate-400">下</td>
                                 <td class="border border-slate-400">
-                                    <Link :href="route('lessonEdit')" :active="route().current('lessonEdit')">
+                                    <Link :href="route('semesterEdit')" :active="route().current('semesterEdit')">
                                         <PublicBtn bg-color="bg-green-500" content="寄送"></PublicBtn>
                                     </Link>
-                                    <Link :href="route('lessonEdit')" :active="route().current('lessonEdit')">
+                                    <Link :href="route('semesterEdit')" :active="route().current('semesterEdit')">
                                         <PublicBtn bg-color="bg-blue-500" content="編輯"></PublicBtn>
                                     </Link>
-                                    <Link :href="route('lessonEdit')" :active="route().current('lessonEdit')">
+                                    <Link :href="route('semesterEdit')" :active="route().current('semesterEdit')">
                                         <PublicBtn bg-color="bg-red-500" content="刪除"></PublicBtn>
                                     </Link>
                                 </td>

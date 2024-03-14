@@ -82,7 +82,15 @@ export default{
                                 <tr class=" bg-gray-300 font-bold border-2 border-black h-[20px]">
                                     <td class="py-1">課程</td>
                                     <td class="py-1">教師</td>                                
-                                </tr>                                
+                                </tr>   
+                                <tr class="border border-b-slate-200 h-[20px]">
+                                    <td class="py-1">國語</td>
+                                    <td class="py-1">Stanley</td>
+                                </tr>
+                                <tr class="border border-b-slate-200 h-[20px]">
+                                    <td class="py-1">國語</td>
+                                    <td class="py-1">Stanley</td>
+                                </tr>                             
                                 <tr>
                                 </tr>
 
