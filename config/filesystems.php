@@ -56,6 +56,12 @@ return [
             'throw' => false,
         ],
 
+        'images' => [
+            'driver' => 'local',
+            'root' => resource_path('/'),
+        ],
+        
+
     ],
 
     /*

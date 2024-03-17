@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\book;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -17,57 +17,78 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/',function(){
-    return Inertia::render('Welcome');});
 
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function () {
+    return Inertia::render('Welcome');
+});
 
-// 要加controller 
-Route::get('/lesson-management', function () {
-    return Inertia::render('LessonManagement');
-})->middleware(['auth', 'verified'])->name('dashboard_2');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
-Route::get('/lesson-add', function () {
-    return Inertia::render('LessonAdd');
-})->middleware(['auth', 'verified'])->name('lessonAdd');
+    // 老師管理
+    Route::get('/teacher-management', function () {
+        return Inertia::render('TeacherManagement');
+    })->name('TeacherManagement');
 
-// 編輯課程
-Route::get('/lesson-edit', function () {
-    return Inertia::render('EditLesson');
-})->middleware(['auth', 'verified'])->name('lessonEdit');
+    // 新增教師
+    Route::get('/teacher-add', function () {
+        return Inertia::render('TeacherAdd');
+    })->name('teacherAdd');
 
-// 老師管理
-Route::get('/teacher-management', function () {
-    return Inertia::render('TeacherManagement');
-})->middleware(['auth', 'verified'])->name('TeacherManagement');
+    // 編輯教師
+    Route::get('/teacher-edit', function () {
+        return Inertia::render('EditTeacher');
+    })->name('teacherEdit');
 
-// 新增教師
-Route::get('/teacher-add', function () {
-    return Inertia::render('TeacherAdd');
-})->middleware(['auth', 'verified'])->name('teacherAdd');
+    // 學期課表總覽
+    Route::get('/semester-management', function () {
+        return Inertia::render('SemesterManagement');
+    })->name('semesterManagement');
 
-// 編輯教師
-Route::get('/teacher-edit', function () {
-    return Inertia::render('EditTeacher');
-})->middleware(['auth', 'verified'])->name('teacherEdit');
+    // 學期課表新增
+    Route::get('/semester-add', function () {
+        return Inertia::render('SemesterAdd');
+    })->name('semesterAdd');
 
-// 學期課表總覽
-Route::get('/semester-management', function () {
-    return Inertia::render('SemesterManagement');
-})->middleware(['auth', 'verified'])->name('semesterManagement');
+    // 學期課表更改
+    Route::get('/semester-edit', function () {
+        return Inertia::render('EditSemester');
+    })->name('semesterEdit');
+});
 
-// 學期課表新增
-Route::get('/semester-add', function () {
-    return Inertia::render('SemesterAdd');
-})->middleware(['auth', 'verified'])->name('semesterAdd');
 
-// 學期課表更改
-Route::get('/semester-edit', function () {
-    return Inertia::render('EditSemester');
-})->middleware(['auth', 'verified'])->name('semesterEdit');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/lesson-management', [LessonController::class,'index'])
+    ->name('dashboard_2');
+
+    Route::get('/lesson-add', function () {
+        return Inertia::render('LessonAdd');
+    })->name('lessonAdd');
+
+    // 增加課程的
+    Route::post('/lesson-1', [LessonController::class, 'addLesson']);
+
+    Route::post('/lesson-edit-1', [LessonController::class, 'bringEditData']);
+    
+    Route::post('/lesson-edit-2', [LessonController::class, 'replaceEditData']);
+
+    // 編輯課程
+    // Route::get('/lesson-edit', function () {
+    //     return Inertia::render('EditLesson');
+    // })->name('lessonEdit');
+});
+
+
+
+
+
+
+
+
 
 
 
@@ -77,4 +98,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

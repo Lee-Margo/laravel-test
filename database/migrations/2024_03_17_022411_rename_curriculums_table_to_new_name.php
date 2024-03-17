@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
-            $table->id();
+        Schema::rename('curriculums', 'lessons');
 
-            $table->timestamps();
+        Schema::table('lessons', function (Blueprint $table) {
+            $table->longText('lesson_description')->nullable()->change();
         });
+        
     }
 
     /**
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::rename('lessons', 'curriculums');
     }
 };

@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('books', function (Blueprint $table) {
-            $table->dropColumn('comment');
+        Schema::create('curriculums', function (Blueprint $table) {
+            $table->id('lesson_id');
+            $table->string('lesson_name');
+            $table->string('lesson_description')->nullable();
+            $table->string('lesson_picture')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('books', function (Blueprint $table) {
-            $table->string('comment');
-        });
+        Schema::dropIfExists('curriculums');
     }
 };
