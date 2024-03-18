@@ -48,35 +48,38 @@ class LessonController extends Controller
 
         return redirect('/lesson-management')->with(['message' => $message]);
     }
-    public function bringEditData(Request $request){
-        $data=[
-            'id'=> $request->id,
-            'name'=> $request->name,
-            'description'=> $request->description,
-            'image'=> $request->image,    
+    public function bringEditData(Request $request)
+    {
+        $data = [
+            'lesson_id' => $request->lesson_id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $request->image,
         ];
-        return Inertia::render('EditLesson',[
-            'response'=>$data,
+        return Inertia::render('EditLesson', [
+            'response' => $data,
         ]);
     }
-    public function replaceEditData(Request $request){
-        // dd($request->lesson_id);
-        $lesson = Lesson::find($request->lesson_id);
 
-        // $message='';
-        $lesson->update([
-            'lesson_name'=>$request->name,
-            'lesson_description'=>$request->description,
-            'lesson_picture'=>$request->image,
-        ]);
-        return redirect('/lesson-management');
+
+    public function replaceEditData(Request $request)
+    {   
+        // dd($request->all());
+        // dd($request->lesson_id);
+        // 使用 find 方法根據 lesson_id 找到對應的課程記錄
+        $lesson = Lesson::get($request->lesson_id);
+        dd($lesson);
+
+        // 如果找到課程，則更新相應的欄位
         
-        // try {
-            
-        //     $message='更改成功';
-        // } catch  (\Throwable $th){
-        //     $message='更改失敗';
-        // }
-        // return redirect('/lesson-management')->with(['message' => $message]);
+            $lesson->update([
+                'lesson_name' => $request->name,
+                'lesson_description' => $request->description,
+                'lesson_picture' => $request->image,
+            ]);
+        
+
+        // 返回到課程管理列表或其他相應頁面
+        return redirect('/lesson-management');
     }
 }

@@ -68,18 +68,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/lesson-add', function () {
         return Inertia::render('LessonAdd');
     })->name('lessonAdd');
+    
+    Route::get('/lesson-edit', function () {
+        return Inertia::render('EditLesson');
+    })->name('lessonEdit');
 
     // 增加課程的
     Route::post('/lesson-1', [LessonController::class, 'addLesson']);
 
-    Route::post('/lesson-edit-1', [LessonController::class, 'bringEditData']);
+    Route::get('/lesson-edit', [LessonController::class, 'bringEditData']);
     
     Route::post('/lesson-edit-2', [LessonController::class, 'replaceEditData']);
 
-    // 編輯課程
-    // Route::get('/lesson-edit', function () {
-    //     return Inertia::render('EditLesson');
-    // })->name('lessonEdit');
 });
 
 

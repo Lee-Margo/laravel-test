@@ -1,7 +1,6 @@
 <script>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
-
 import PublicBtn from '@/Components/PublicBtn.vue';
 // import NavLink from '@/Components/NavLink.vue';
 export default {
@@ -26,18 +25,18 @@ export default {
             return new URL('../../' + filename, import.meta.url).href;
         },
         uploadImg(e) {
-            this.image = e.target.files[0];
+            this.response.image = e.target.files[0];
             // Preview the image immediately after selecting
-            this.imageUrl = URL.createObjectURL(this.image);
+            this.imageUrl = URL.createObjectURL(this.response.image);
         },
         editLesson(){
-            this.$inertia.post('/lesson-edit-2',{
-                lesson_id: this.response.id,
+            this.$inertia.post('/lesson-edit-2', {
+                lesson_id: this.response.lesson_id,
                 name: this.response.name,
                 description: this.response.description,
                 image: this.response.image,
             });
-        }
+        },
     },
 }
 </script>
@@ -92,7 +91,7 @@ export default {
                         <PublicBtn bg-color="bg-slate-500" content="返回列表"></PublicBtn>
                         </Link>
 
-                        <PublicBtn bg-color="bg-blue-500" content="儲存" @click="editLesson()"></PublicBtn>
+                        <PublicBtn bg-color="bg-blue-500" content="儲存" @click="editLesson"></PublicBtn>
                     </div>
 
                 </div>

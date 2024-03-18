@@ -24,14 +24,17 @@ export default {
         getImagePath(filename) {
             return new URL('../../' + filename, import.meta.url).href;
         },
+
         editBook(lesson) {
-            this.$inertia.post('/lesson-edit-1', {
-                id: lesson.lesson_id,
+            this.$inertia.get('/lesson-edit', {
+                lesson_id: lesson.lesson_id,
                 name: lesson.lesson_name,
                 description: lesson.lesson_description,
                 image: lesson.lesson_picture,
             });
+
         },
+
     },
 }
 </script>
@@ -71,7 +74,8 @@ export default {
                                         style="height: 150px;">
                                 </td>
                                 <td class="border border-slate-400">
-                                    <PublicBtn bg-color="bg-blue-500" content="編輯" @click="editBook(lesson)"></PublicBtn>
+                                    <PublicBtn bg-color="bg-blue-500" content="編輯" @click="editBook(lesson)">
+                                    </PublicBtn>
                                     <button class="bg-red-500 text-white p-2 m-2 rounded-md">刪除</button>
                                 </td>
                             </tr>
