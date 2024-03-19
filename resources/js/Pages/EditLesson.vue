@@ -30,7 +30,7 @@ export default {
             this.imageUrl = URL.createObjectURL(this.response.image);
         },
         editLesson(){
-            this.$inertia.post('/lesson-edit-2', {
+            this.$inertia.post(route('lesson.edit2'), {
                 lesson_id: this.response.lesson_id,
                 name: this.response.name,
                 description: this.response.description,
@@ -88,7 +88,7 @@ export default {
                     </form>
                     <div class="flex justify-center">
                         <Link :href="route('dashboard_2')" :active="route().current('dashboard_2')">
-                        <PublicBtn bg-color="bg-slate-500" content="返回列表"></PublicBtn>
+                            <PublicBtn bg-color="bg-slate-500" content="返回列表"></PublicBtn>
                         </Link>
 
                         <PublicBtn bg-color="bg-blue-500" content="儲存" @click="editLesson"></PublicBtn>

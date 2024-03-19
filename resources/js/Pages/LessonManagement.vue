@@ -22,18 +22,28 @@ export default {
     },
     methods: {
         getImagePath(filename) {
-            return new URL('../../' + filename, import.meta.url).href;
+            return new URL('/img/' + filename, import.meta.url).href;
         },
 
         editBook(lesson) {
-            this.$inertia.get('/lesson-edit', {
-                lesson_id: lesson.lesson_id,
+
+            this.$inertia.get(route('lesson.edit', lesson.id ), {
+                lesson_id: lesson.id,
                 name: lesson.lesson_name,
                 description: lesson.lesson_description,
                 image: lesson.lesson_picture,
             });
 
         },
+        deleteBook(lesson) {
+            this.inertia.get(route('lesson.delete', lesson.id),{
+                lesson_id: lesson.id,
+                name: lesson.lesson_name,
+                description: lesson.lesson_description,
+                image: lesson.lesson_picture,
+            })
+
+        }
 
     },
 }
@@ -66,8 +76,8 @@ export default {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="lesson in response.lessons" :key="lesson.lesson_id">
-                                <td class="border border-slate-400">{{ lesson.lesson_id }}</td>
+                            <tr v-for="(lesson, index) in response.lessons" :key="lesson.id">
+                                <td class="border border-slate-400">{{ index +1 }}</td>
                                 <td class="border border-slate-400">{{ lesson.lesson_name }}</td>
                                 <td class="border flex justify-center">
                                     <img :src="getImagePath(lesson.lesson_picture)" class="border-0"
@@ -76,7 +86,7 @@ export default {
                                 <td class="border border-slate-400">
                                     <PublicBtn bg-color="bg-blue-500" content="編輯" @click="editBook(lesson)">
                                     </PublicBtn>
-                                    <button class="bg-red-500 text-white p-2 m-2 rounded-md">刪除</button>
+                                    <button class="bg-red-500 text-white p-2 m-2 rounded-md" @click="deleteBook(lesson)">刪除</button>
                                 </td>
                             </tr>
                         </tbody>

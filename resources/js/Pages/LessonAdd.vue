@@ -31,7 +31,7 @@ export default {
             this.imageUrl = URL.createObjectURL(this.image);
         },
         addLesson() {
-            this.$inertia.post('/lesson-1', {
+            this.$inertia.post('/lesson/1', {
                 name: this.name,
                 description: this.description,
                 image: this.image,

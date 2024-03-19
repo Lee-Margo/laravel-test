@@ -61,25 +61,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/lesson-management', [LessonController::class,'index'])
+Route::prefix('lesson')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [LessonController::class,'index'])
     ->name('dashboard_2');
 
-    Route::get('/lesson-add', function () {
+    Route::get('/add', function () {
         return Inertia::render('LessonAdd');
     })->name('lessonAdd');
     
-    Route::get('/lesson-edit', function () {
-        return Inertia::render('EditLesson');
-    })->name('lessonEdit');
+    // Route::get('/edit', function () {
+    //     return Inertia::render('EditLesson');
+    // })->name('lessonEdit');
 
     // 增加課程的
-    Route::post('/lesson-1', [LessonController::class, 'addLesson']);
+    Route::post('/1', [LessonController::class, 'addLesson']);
 
-    Route::get('/lesson-edit', [LessonController::class, 'bringEditData']);
+    Route::get('/edit/{id}', [LessonController::class, 'bringEditData'])
+    ->name('lesson.edit');
     
-    Route::post('/lesson-edit-2', [LessonController::class, 'replaceEditData']);
-
+    Route::post('/edit-2', [LessonController::class, 'replaceEditData'])
+    ->name('lesson.edit2');
+    
+    Route::post('/delete/{id}', [LessonController::class, 'deleteLesson'])
+    ->name('lesson.delete');
 });
 
 

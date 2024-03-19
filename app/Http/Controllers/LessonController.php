@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Lesson;
 use Inertia\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class LessonController extends Controller
@@ -46,7 +47,7 @@ class LessonController extends Controller
             $message = '新增失敗';
         };
 
-        return redirect('/lesson-management')->with(['message' => $message]);
+        return redirect('/lesson')->with(['message' => $message]);
     }
     public function bringEditData(Request $request)
     {
@@ -63,23 +64,38 @@ class LessonController extends Controller
 
 
     public function replaceEditData(Request $request)
-    {   
+    {
         // dd($request->all());
         // dd($request->lesson_id);
         // 使用 find 方法根據 lesson_id 找到對應的課程記錄
-        $lesson = Lesson::get($request->lesson_id);
-        dd($lesson);
+        $lesson = Lesson::find($request->lesson_id);
+        // dd($lesson);
 
         // 如果找到課程，則更新相應的欄位
-        
-            $lesson->update([
-                'lesson_name' => $request->name,
-                'lesson_description' => $request->description,
-                'lesson_picture' => $request->image,
-            ]);
-        
+
+        $lesson->update([
+            'lesson_name' => $request->name,
+            'lesson_description' => $request->description,
+            'lesson_picture' => $request->image,
+        ]);
+
+        if (file_exists(public_path() . $lesson->photo)) {
+            File::delete((public_path() . $lesson->photo));
+        } else {
+            $path = $lesson->photo;
+        }
+
 
         // 返回到課程管理列表或其他相應頁面
-        return redirect('/lesson-management');
+        return redirect('/lesson');
+    }
+    public function deleteLesson($id)
+    {
+        $lesson = Lesson::find($id);
+
+        if (file_exists(public_path() . $lesson->image)) {
+            File::delete((public_path() . $lesson->image));
+        }
+        
     }
 }

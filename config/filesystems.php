@@ -58,7 +58,7 @@ return [
 
         'images' => [
             'driver' => 'local',
-            'root' => resource_path('/'),
+            'root' => public_path('/'),
         ],
         
 
