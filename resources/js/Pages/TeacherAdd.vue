@@ -13,7 +13,16 @@ export default{
     data(){
         return{
             mandarin:mandarin,
+            form:{
+                courseId:'',
+                name:'',
+                description:'',
+
+            }
         }
+    },
+    methods:{
+        this.$inertia.post(route('teacher.store'))
     },
 }
 </script>

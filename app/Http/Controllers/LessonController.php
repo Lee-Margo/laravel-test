@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Lesson;
+use App\Notifications\UserMessage;
 use Inertia\Controller;
 use Illuminate\Http\Request;
+use App\Services\FilesService;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -89,13 +92,53 @@ class LessonController extends Controller
         // 返回到課程管理列表或其他相應頁面
         return redirect('/lesson');
     }
-    public function deleteLesson($id)
+    public function deleteLesson($id, FilesService $filesService)
     {
         $lesson = Lesson::find($id);
 
-        if (file_exists(public_path() . $lesson->image)) {
-            File::delete((public_path() . $lesson->image));
-        }
+        $filesService->deleteFile($lesson->image);
         
     }
+
+    // teacher controller
+    // public function store(Request $request){
+    //     Teacher::Create([
+    //         $id=>$request->courseId,
+    //         'name'=>$request->name,
+    //     ]);
+    // }
+
+
+    // teacher create 關聯
+    // public function create()
+    // {
+    //     $teachers = Teacher::with('course')->get();
+        
+    //     $newTeachers = $teachers->map(function ($teacher){
+    //         return[
+    //             'id'=>$teacher->id,
+    //             'name'=>$teacher->name,
+    //             'course_id'=>$teacher->course_id,
+    //             'course_name'=>$teacher?->course?->course_name??'',
+    //         ];
+    //     });
+    //     return Inertia::render('SchduleFolder/ScheduleCreate',['response' => $newTeachers]);
+    // }
+        
+    public function sendMail(){
+        // dd(123);
+        $user = User::find(1);
+        $data=(object)[
+            'title' => 'Hello',
+            'content' => '我寄信給你囉',
+        ];
+        $user->notify(new UserMessage($data));
+
+    }
 }
+
+
+
+
+
+

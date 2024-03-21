@@ -22,27 +22,14 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', function () {
     return Inertia::render('Welcome');
 });
+Route::get('/send-mail',[LessonController::class,'sendMail'])->name('send.mail');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    // 老師管理
-    Route::get('/teacher-management', function () {
-        return Inertia::render('TeacherManagement');
-    })->name('TeacherManagement');
-
-    // 新增教師
-    Route::get('/teacher-add', function () {
-        return Inertia::render('TeacherAdd');
-    })->name('teacherAdd');
-
-    // 編輯教師
-    Route::get('/teacher-edit', function () {
-        return Inertia::render('EditTeacher');
-    })->name('teacherEdit');
-
+    
     // 學期課表總覽
     Route::get('/semester-management', function () {
         return Inertia::render('SemesterManagement');
@@ -59,6 +46,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('semesterEdit');
 });
 
+Route::prefix('teacher')->middleware(['auth', 'verified'])->group(function () {
+    // 老師管理
+    Route::get('/', function () {
+        return Inertia::render('TeacherManagement');
+    })->name('TeacherManagement');
+
+    // 新增教師
+    Route::get('/add', function () {
+        return Inertia::render('TeacherAdd');
+    })->name('teacher.add');
+
+    // 編輯教師
+    Route::get('/edit', function () {
+        return Inertia::render('EditTeacher');
+    })->name('teacher.edit');
+    
+    // 編輯教師
+    Route::post('/store', function () {
+        return Inertia::render('EditTeacher');
+    })->name('teacher.store');
+
+});
 
 
 Route::prefix('lesson')->middleware(['auth', 'verified'])->group(function () {
